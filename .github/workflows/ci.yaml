@@ -39,8 +39,8 @@ jobs:
                   type: 'zip'
                   filename: 'site.zip'
         
-            - name: Create Release
-
+            - name: Create Github Release
+              id: create_new_release 
               uses: actions/create-release@v1
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
@@ -49,6 +49,15 @@ jobs:
                   release_name: Release ${{ github.run_number }}
                   body: "Automated release of the static site"    
 
+            - name: Upload Release Asset
+              uses: actions/upload-release-asset@v1
+              env:
+               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                upload_url: ${{ steps.create_new_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+                asset_path: ./site.zip
+                asset_name: site v${{ github.run_number }}.zip
+                asset_content_type: application/zip
 
 
 
