@@ -5,7 +5,7 @@ jobs:
         name: Build Project
         runs-on: ubuntu-latest
         container: node:20
-            
+        
         steps:
           - name: checkout code
             uses: actions/checkout@v4
@@ -28,8 +28,6 @@ jobs:
         steps:
             - name: Download static site content
               uses: actions/download-artifact@v4
-            - name: Check downloaded-static-site
-              run: ls -R   
             
             - name: checkout code  
               uses: actions/checkout@master
@@ -45,7 +43,7 @@ jobs:
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
               with:
-                  tag_name: ${{ github.run_number }}
+                  tag_name: ${{ github.sha }}
                   release_name: Release ${{ github.run_number }}
                   body: "Automated release of the static site"    
 
