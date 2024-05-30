@@ -5,6 +5,7 @@ jobs:
         name: Build Project
         runs-on: ubuntu-latest
         container: node:20
+            
         steps:
           - name: checkout code
             uses: actions/checkout@v4
@@ -25,14 +26,25 @@ jobs:
         steps:
             - name: Download static site content
               uses: actions/download-artifact@v4
-            - name: downloaded-static-site
+            - name: Check downloaded-static-site
               run: ls -R   
-            - uses: actions/checkout@master
-            - name: Archive site content
+            
+            - name: checkout code  
+              uses: actions/checkout@master
+            - name: Zip site content
               uses: thedoctor0/zip-release@0.7.5
               with:
                   type: 'zip'
                   filename: 'site.zip'
+            - name: Create Release
+              uses: actions/create-release@v1
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+              with:
+                  tag_name: ${{ github.run_number }}
+                  release_name: Release ${{ github.ref }}
+
+
 
 
 
