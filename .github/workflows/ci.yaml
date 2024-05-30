@@ -20,6 +20,8 @@ jobs:
                 path: .next/
 
     release_project:
+        permissions:
+          contents: write 
         name: Release Project
         runs-on: ubuntu-latest
         needs: build_project
@@ -36,13 +38,16 @@ jobs:
               with:
                   type: 'zip'
                   filename: 'site.zip'
+        
             - name: Create Release
+
               uses: actions/create-release@v1
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
               with:
                   tag_name: ${{ github.run_number }}
                   release_name: Release ${{ github.run_number }}
+                  body: "Automated release of the static site"    
 
 
 
