@@ -15,7 +15,9 @@ jobs:
             uses: actions/upload-artifact@v3
             with:
                 name: static-site 
-                path: artifacts/   
+                path: |
+                  artifacts/
+                  .next/   
 
             
 
