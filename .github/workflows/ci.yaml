@@ -12,7 +12,7 @@ jobs:
           - name: Build project assets
             run: npm run 
           - name: Upload static site content
-            uses: actions/upload-artifact@v3
+            uses: actions/upload-artifact@v2
             with:
                 name: static-site 
                 path: .next/ 
