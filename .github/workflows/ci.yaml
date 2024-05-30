@@ -4,7 +4,7 @@ jobs:
     build_project:
         name: Build Project
         runs-on: ubuntu-latest
-        container: node:20
+        container: node:16
         steps:
           - name: checkout code
             uses: actions/checkout@v2
@@ -16,7 +16,7 @@ jobs:
             uses: actions/upload-artifact@v3
             with:
                 name: static-site 
-                path: nextwebapp/
+                path: .next/
 
             
 
