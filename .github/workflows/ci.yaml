@@ -2,7 +2,7 @@ name: Build nextwebapp
 on: push
 jobs:
     build_project:
-        name: build_project
+        name: Build Project
         runs-on: ubuntu-latest
         steps:
           - name: checkout code
@@ -10,4 +10,12 @@ jobs:
           - name: Install NPM dependencies
             run: npm install
           - name: Build project assets
-            run: npm run build     
+            run: npm run 
+          - name: Upload static site content
+            uses: actions/upload-artifact@v3
+            with:
+                name: static-site 
+                path: ./next   
+
+            
+
