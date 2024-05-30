@@ -1,4 +1,4 @@
-name: Build nextwebapp
+name: Continuous Integration
 on: push
 jobs:
     build_project:
@@ -58,7 +58,3 @@ jobs:
                 asset_path: ./site.zip
                 asset_name: site v${{ github.run_number }}.zip
                 asset_content_type: application/zip
-
-
-
-
