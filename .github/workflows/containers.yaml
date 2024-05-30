@@ -17,6 +17,4 @@ jobs:
           with:
             context: .
             push: true
-            tags: |
-              'thiexco/nextwebapp:latest'
-              'thiexco/node_js_app:latest'
+            tags: thiexco/nextwebapp:latest
